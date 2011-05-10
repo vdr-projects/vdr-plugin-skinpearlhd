@@ -1,0 +1,37 @@
+This is a "plugin" for the Video Disk Recorder (VDR).
+
+Written by:                  Maniac
+
+Project's homepage:          http://projects.vdr-developer.org/projects/show/plg-skinpearlhd
+
+Latest version available at: http://projects.vdr-developer.org/git/?p=vdr-plugin-skinpearlhd.git
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+See the file COPYING for more information.
+
+Description:
+============
+
+This is a conversion of the PearlHD-Skin written by mapovi to a native vdr-plugin.
+The original skin uses the text2skin-plugin.
+Only 1920x1080 at truecolor or 256 colors supported for now. Support for 1280x720 will follow in a later version.
+
+Requirements:
+=============
+
+ - ImageMagick
+
+Comandline parameter:
+=====================
+
+  -e DIR,      --epgimages=DIR      set directory for epgimages
+  
+Setup:
+======
+Almost all options can be configured in the setup menu of the plugin.
+The default directory for epgimages is $(VDRCONFDIR)/plugins/tvm2vdr/epgimages
+Logo directory is $(VDRCONFDIR)/plugins/skinpearlhd/logos
+You can use png or jpg logos.

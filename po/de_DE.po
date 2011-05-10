@@ -1,0 +1,173 @@
+# VDR plugin language source file.
+# This file is distributed under the same license as the VDR package.
+msgid ""
+msgstr ""
+"Project-Id-Version: VDR 1.7.17\n"
+"Report-Msgid-Bugs-To: <see README>\n"
+"POT-Creation-Date: 2011-05-10 18:12+0200\n"
+"PO-Revision-Date: 2010-10-10 10:10+0300\n"
+"Last-Translator: a\n"
+"Language-Team: German\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=ISO-8859-15\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+
+msgid "cutted"
+msgstr "geschnitten"
+
+msgid "oClock"
+msgstr "Uhr"
+
+msgid "Conflicting Timers"
+msgstr "Timerkonflikte"
+
+msgid "Pause"
+msgstr "Pause"
+
+msgid "Slow rewind"
+msgstr "Zeitlupe Rückwärts"
+
+#, fuzzy
+msgid "Slow rewind x1"
+msgstr "Zeitlupe Rückwärts"
+
+#, fuzzy
+msgid "Slow rewind x2"
+msgstr "Zeitlupe Rückwärts"
+
+#, fuzzy
+msgid "Slow rewind x3"
+msgstr "Zeitlupe Rückwärts"
+
+msgid "Slow forward"
+msgstr "Zeitlupe Vorwärts"
+
+#, fuzzy
+msgid "Slow forward x1"
+msgstr "Zeitlupe Vorwärts"
+
+#, fuzzy
+msgid "Slow forward x2"
+msgstr "Zeitlupe Vorwärts"
+
+#, fuzzy
+msgid "Slow forward x3"
+msgstr "Zeitlupe Vorwärts"
+
+msgid "Playing"
+msgstr "Playing"
+
+msgid "Fast rewind"
+msgstr "Zurückspulen"
+
+#, fuzzy
+msgid "Fast rewind x1"
+msgstr "Zurückspulen"
+
+#, fuzzy
+msgid "Fast rewind x2"
+msgstr "Zurückspulen"
+
+#, fuzzy
+msgid "Fast rewind x3"
+msgstr "Zurückspulen"
+
+msgid "Fast forward"
+msgstr "Vorlauf"
+
+#, fuzzy
+msgid "Fast forward x1"
+msgstr "Vorlauf"
+
+#, fuzzy
+msgid "Fast forward x2"
+msgstr "Vorlauf"
+
+#, fuzzy
+msgid "Fast forward x3"
+msgstr "Vorlauf"
+
+msgid "of"
+msgstr "von"
+
+msgid "Volume"
+msgstr "Lautstärke"
+
+msgid "Mute"
+msgstr "Stumm"
+
+msgid "PearlHD"
+msgstr ""
+
+msgid "General"
+msgstr ""
+
+msgid "Don't show"
+msgstr "nicht anzeigen"
+
+msgid "Top"
+msgstr "Oben"
+
+msgid "Bottom"
+msgstr "Unten"
+
+msgid "Display oClock text"
+msgstr "Uhrtext anzeigen"
+
+msgid "Display clock in Recordings/Timer menu"
+msgstr "Uhrzeit im Aufnahme/Timer Menü anzeigen"
+
+msgid "Display epg images"
+msgstr "EPG-Bilder anzeigen"
+
+msgid "Epg images format"
+msgstr "EPG-Bildformat"
+
+msgid "Padding sides"
+msgstr "Abstand zu den Seiten"
+
+msgid "Padding top/bottom"
+msgstr "Abstand nach oben/unten"
+
+msgid "Item line height"
+msgstr "Eintraghöhe"
+
+msgid "Show running recordings in the header"
+msgstr "Laufende Aufnahmen im Kopf anzeigen"
+
+msgid "Show timers in the right bar at"
+msgstr "Timer im rechten Bereich anzeigen"
+
+msgid "Channel Info"
+msgstr "Kanal Informationen"
+
+msgid "Left"
+msgstr "Links"
+
+msgid "Right"
+msgstr "Rechts"
+
+msgid "Channel logo position"
+msgstr "Kanal Logo Position"
+
+msgid "Channel logo format"
+msgstr "Knala Logo Format"
+
+msgid "Button red text"
+msgstr "Beschriftung roter Button"
+
+msgid "Button green text"
+msgstr "Beschriftung grüner Button"
+
+msgid "Button yellow text"
+msgstr "Beschriftung gelber Button"
+
+msgid "Button blue text"
+msgstr "Beschriftung blauer Button"
+
+msgid "Display crypt symbols"
+msgstr "Symbole zur Verschlüsselung anzeigen"
+
+msgid "Menu"
+msgstr "Menü"
