@@ -85,6 +85,7 @@ private:
   int blinkState;
   bool withInfo;
   int lineHeight;
+  char lastdatetime[50];
   const cFont *fontSansBook15;
   const cFont *fontSansBook27;
   const cFont *fontSansBook37;
@@ -130,6 +131,8 @@ cSkinPearlHDDisplayChannel::cSkinPearlHDDisplayChannel(bool WithInfo)
   
   blinkNext=0;
   blinkState=0;
+  
+  strcpy (lastdatetime, "");
 
   osd = cOsdProvider::NewOsd(cOsd::OsdLeft(), cOsd::OsdTop());
   tArea Areas[] = { { 0, 0, cOsd::OsdWidth() - 1, cOsd::OsdHeight() - 1, 32 } }; // TrueColor
@@ -432,16 +435,20 @@ void cSkinPearlHDDisplayChannel::SetMessage(eMessageType Type, const char *Text)
 
 void cSkinPearlHDDisplayChannel::Flush(void)
 {
-  osd->DrawRectangle(x1DateTime, y1DateTime, x2DateTime, y1DateTime + 20, Theme.Color(clrMainLight));
-  osd->DrawEllipse(x1DateTime, y1DateTime + 20, x1DateTime + 50, y1DateTime + 70, Theme.Color(clrMainLight), 3);
-  osd->DrawRectangle(x1DateTime + 50, y1DateTime + 20, x2DateTime, y1DateTime + 70, Theme.Color(clrMainLight));
   char datetime[50];
   struct tm tm_r;
   time_t t;
   time(&t);
   tm *tm = localtime_r(&t, &tm_r);
   snprintf(datetime, sizeof(datetime), "%s %02d.%02d. %02d:%02d", *WeekDayNameFull(t), tm->tm_mday, tm->tm_mon + 1, tm->tm_hour, tm->tm_min);
-  osd->DrawText(x1DateTime + 30, y1DateTime + 20, datetime, Theme.Color(clrFontColor), clrTransparent, fontSansBook27);
+  if (strcmp(lastdatetime, datetime) != 0)
+  {
+    osd->DrawRectangle(x1DateTime, y1DateTime, x2DateTime, y1DateTime + 20, Theme.Color(clrMainLight));
+    osd->DrawEllipse(x1DateTime, y1DateTime + 20, x1DateTime + 50, y1DateTime + 70, Theme.Color(clrMainLight), 3);
+    osd->DrawRectangle(x1DateTime + 50, y1DateTime + 20, x2DateTime, y1DateTime + 70, Theme.Color(clrMainLight));
+    osd->DrawText(x1DateTime + 30, y1DateTime + 20, datetime, Theme.Color(clrFontColor), clrTransparent, fontSansBook27);
+	strcpy(lastdatetime, datetime);
+  }
   
   cPlugin *p = cPluginManager::GetPlugin("epgsearch");
   if (!isGroupSep && p)
