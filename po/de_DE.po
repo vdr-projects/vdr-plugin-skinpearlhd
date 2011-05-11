@@ -152,7 +152,7 @@ msgid "Channel logo position"
 msgstr "Kanal Logo Position"
 
 msgid "Channel logo format"
-msgstr "Knala Logo Format"
+msgstr "Kanal Logo Format"
 
 msgid "Button red text"
 msgstr "Beschriftung roter Button"
