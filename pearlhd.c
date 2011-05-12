@@ -1844,7 +1844,7 @@ void cSkinPearlHDDisplayMessage::Flush(void)
 
 // --- cSkinPearlHD ----------------------------------------------------------
 
-cSkinPearlHD::cSkinPearlHD() : cSkin("PearlHD", &::Theme)
+cSkinPearlHD::cSkinPearlHD() : cSkin("PearlHD(native)", &::Theme)
 {
   // Get the "classic" skin to be used as fallback skin if any of the OSD
   // menu fails to open.
@@ -1859,7 +1859,7 @@ cSkinPearlHD::cSkinPearlHD() : cSkin("PearlHD", &::Theme)
 
 const char *cSkinPearlHD::Description(void)
 {
-  return tr("PearlHD");
+  return tr("PearlHD(native)");
 }
 
 cSkinDisplayChannel *cSkinPearlHD::DisplayChannel(bool WithInfo)
