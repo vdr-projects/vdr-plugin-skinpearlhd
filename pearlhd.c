@@ -15,6 +15,7 @@
 #include <vdr/osd.h>
 #include <vdr/themes.h>
 #include <vdr/plugin.h>
+#include <vdr/tools.h>
 
 #define MENU_TYPE_VDR 1
 #define MENU_TYPE_SCHEDULE 2
@@ -152,6 +153,11 @@ cSkinPearlHDDisplayChannel::cSkinPearlHDDisplayChannel(bool WithInfo)
       osd->SetAreas(Areas, sizeof(Areas) / sizeof(tArea));
     }
   }
+  
+  if ((SysLogLevel == 3) && (bpp == 24))
+    printf ("skinpearlhd: using truecolor mode\n");
+  if ((SysLogLevel == 3) && (bpp == 8))
+    printf ("skinpearlhd: using 256 color mode\n");
 		
   osd->DrawRectangle(cOsd::OsdLeft(), cOsd::OsdTop(), cOsd::OsdWidth(), cOsd::OsdHeight(), clrTransparent);
 	
@@ -694,6 +700,12 @@ cSkinPearlHDDisplayMenu::cSkinPearlHDDisplayMenu(void)
       osd->SetAreas(Areas, sizeof(Areas) / sizeof(tArea));
 	}
   }
+  
+  if ((SysLogLevel == 3) && (bpp == 24))
+    printf ("skinpearlhd: using truecolor mode\n");
+  if ((SysLogLevel == 3) && (bpp == 8))
+    printf ("skinpearlhd: using 256 color mode\n");
+	
   osd->DrawRectangle(1,1,1,1, clrTransparent);
   osd->DrawRectangle(x2Menu-957, y2Menu+1, x2Menu-957, y2Menu+1, clrTransparent);
   osd->DrawRectangle(x2Menu-477, y2Menu+1, x2Menu-477, y2Menu+1, clrTransparent);
