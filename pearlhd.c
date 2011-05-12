@@ -385,26 +385,26 @@ void cSkinPearlHDDisplayChannel::SetEvents(const cEvent *Present, const cEvent *
 		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 106 + (i * 95), title, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
 		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 151 + (i * 95), e->ShortText(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
 		 
-		 if (PearlHDConfig.ChannelLogoPos != 2)
+		 if (i == 0)
 		 {
-		   if (i == 0)
+		   osd->DrawRectangle(x1ChannelInfo, y1ChannelInfo + 50, x2ChannelInfo, y1ChannelInfo + 70, Theme.Color(clrBar));
+		   int xBarLength = (int)(ceil((float)((time(NULL) - e->StartTime())) / (float)(e->Duration()) * (float)(x2ChannelInfo - x1ChannelInfo)));
+		   osd->DrawRectangle(x1ChannelInfo, y1ChannelInfo + 50, x1ChannelInfo + xBarLength, y1ChannelInfo + 70, Theme.Color(clrBarFill));
+		   int iRemaining = (e->Duration() - (time(NULL) - e->StartTime())) / 60;
+		   char sRemaining[12];
+		   snprintf(sRemaining, sizeof(sRemaining), "%d", iRemaining);
+		   if (PearlHDConfig.ChannelLogoPos != 2)
 		   {
-		     osd->DrawRectangle(x1ChannelInfo, y1ChannelInfo + 50, x2ChannelInfo, y1ChannelInfo + 70, Theme.Color(clrBar));
-		     int xBarLength = (int)(ceil((float)((time(NULL) - e->StartTime())) / (float)(e->Duration()) * (float)(x2ChannelInfo - x1ChannelInfo)));
-		     osd->DrawRectangle(x1ChannelInfo, y1ChannelInfo + 50, x1ChannelInfo + xBarLength, y1ChannelInfo + 70, Theme.Color(clrBarFill));
-		     int iRemaining = (e->Duration() - (time(NULL) - e->StartTime())) / 60;
-		     char sRemaining[12];
-		     snprintf(sRemaining, sizeof(sRemaining), "%d", iRemaining);
 			 osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 95, "m", Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook15, 95, 0, taRight);
              osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 95, sRemaining, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 75, 0, taRight);
 		   }
-		   else
-		   {
-			  char sNextDuration[12];
-              snprintf(sNextDuration, sizeof(sNextDuration), "%d", e->Duration() / 60);
-			  osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 190, "m", Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook15, 95, 0, taRight);
-              osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 190, sNextDuration, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 75, 0, taRight);			
-		   }
+		 }
+		 else if (PearlHDConfig.ChannelLogoPos != 2)
+		 {
+		   char sNextDuration[12];
+           snprintf(sNextDuration, sizeof(sNextDuration), "%d", e->Duration() / 60);
+		   osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 190, "m", Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook15, 95, 0, taRight);
+           osd->DrawText(x2ChannelInfo - 120, y1ChannelInfo + 190, sNextDuration, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 75, 0, taRight);			
 		 }
      }
   }
