@@ -1180,7 +1180,7 @@ void cSkinPearlHDDisplayMenu::Flush(void)
 	  st << (t->Recording() ? t->Stop() : t->Start());
 	  std::string timestring;
 	  timestring = st.str();
-	  timestring.insert(2, ":");
+	  timestring.insert(timestring.length()-2, ":");
 	  timestring += " / ";
       timestring += t->Channel()->Name();
 
