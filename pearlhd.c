@@ -216,9 +216,9 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
 	
 	case 2 :
 	  if(osdbitmap.Load(displayLogoPath.c_str())){
-	    logo.SetSize(120, 120);
-        osdbitmap.Render(logo, 120, 120, bpp, false);
-        osd->DrawBitmap(x2ChannelInfo-125, y1ChannelInfo+195, logo);
+	    logo.SetSize(120, 100);
+        osdbitmap.Render(logo, 120, 100, bpp, false);
+        osd->DrawBitmap(x2ChannelInfo-125, y2ChannelInfo-110, logo);
       }
 	break;
   }
