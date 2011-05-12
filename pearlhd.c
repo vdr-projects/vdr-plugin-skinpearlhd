@@ -663,7 +663,7 @@ cSkinPearlHDDisplayMenu::cSkinPearlHDDisplayMenu(void)
   x1Menu = PearlHDConfig.MenuPaddingWidth;
   x2Menu = cOsd::OsdWidth() - PearlHDConfig.MenuPaddingWidth;
   y1Menu = PearlHDConfig.MenuPaddingHeight;
-  y2Menu = cOsd::OsdHeight() - PearlHDConfig.MenuPaddingHeight;
+  y2Menu = cOsd::OsdHeight() - PearlHDConfig.MenuPaddingHeight - 34;
   fontSansBook15 = cFont::CreateFont("VDRSymbols Sans:Book", 15);
   fontSansBook20 = cFont::CreateFont("VDRSymbols Sans:Book", 20);
   fontSansBook22 = cFont::CreateFont("VDRSymbols Sans:Book", 22);
