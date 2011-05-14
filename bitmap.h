@@ -14,6 +14,9 @@ public:
   cOSDImageBitmap();
   ~cOSDImageBitmap();
   bool Load(cBitmap &bmp, const char *Filename, int width=0, int height=0, int bpp=0);
+  #if VDRVERSNUM > 10716
+  bool Load(cImage &bmp, const char *Filename, int width, int height);
+  #endif
 private:	
 };
 
