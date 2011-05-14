@@ -13,23 +13,8 @@ class cOSDImageBitmap {
 public:
   cOSDImageBitmap();
   ~cOSDImageBitmap();
-  bool LoadZoomed(const char *file, int zoomWidth, int zoomHeight, int zoomLeft, int zoomTop);
-  bool Load(const char *file);
-  void Save(const char *file);
-  void Render(cBitmap &bmp, int wWindow, int hWindow, int colors, bool dither);    
-  void Render(cBitmap &bmp, int colors, int alpha=255);
-  inline int Width() { return width; }
-  inline int Height() { return height; }
-
+  bool Load(cBitmap &bmp, const char *Filename, int width=0, int height=0, int bpp=0);
 private:	
-  bool LoadImageMagick(Image &imgkLoad, const char *file);
-  void QuantizeImageMagick(Image &imgkQuant, int colors, bool dither);
-  void ConvertImgk2Bmp(cBitmap &bmp, Image &imgkConv, int colors);
-  Image imgkZoom, imgkImage;
-  int ZoomWidth, ZoomHeight, ZoomLeft, ZoomTop;
-  int origWidth, origHeight;
-  bool loadingFailed;
-  int width, height;
 };
 
 #endif

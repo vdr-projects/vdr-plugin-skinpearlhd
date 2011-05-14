@@ -213,17 +213,13 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
   switch (PearlHDConfig.ChannelLogoPos)
   {
     case 1 :
-	  if(osdbitmap.Load(displayLogoPath.c_str())){
-	    logo.SetSize(64, 48);
-        osdbitmap.Render(logo, 64, 48, bpp, false);
+	  if(osdbitmap.Load(logo, displayLogoPath.c_str(), 64, 48)){
         osd->DrawBitmap(x1ChannelInfo+120, y1ChannelInfo, logo);
       }
 	break;
 	
 	case 2 :
-	  if(osdbitmap.Load(displayLogoPath.c_str())){
-	    logo.SetSize(120, 100);
-        osdbitmap.Render(logo, 120, 100, bpp, false);
+	  if(osdbitmap.Load(logo, displayLogoPath.c_str(), 120, 100)){
         osd->DrawBitmap(x2ChannelInfo-125, y2ChannelInfo-110, logo);
       }
 	break;
@@ -964,8 +960,7 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
 	  epgPath << cPlugin::ConfigDirectory() << "/tvm2vdr/epgimages";
 	}
 	epgPath << "/" << Event->EventID() << "." << logoFormat;
-    if(osdbitmap.Load(epgPath.str().c_str())){
-	  osdbitmap.Render(epgImg, 300, 225, bpp, false);
+    if(osdbitmap.Load(epgImg, epgPath.str().c_str(), 300, 225, bpp)){
       osd->DrawBitmap(x2Menu-330, y2Menu-285, epgImg);
     }
   }
