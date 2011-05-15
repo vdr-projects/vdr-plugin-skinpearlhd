@@ -945,7 +945,10 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
       const char *s = GetTabbedText(Text, i);
       if (s) {
 		 int xt = x1Item+75 + Tab(i);
-		 osd->DrawText(xt, y1Item+4, s, Current ? Theme.Color(clrFontColor) : Theme.Color(clrFontColorInactive), clrTransparent, fontSansBook27, x2Item - xt - 4);
+		 int xt_end = Tab(i+1);
+		 if (!Tab(i+1))
+		   xt_end = x2Item-xt;
+		 osd->DrawText(xt, y1Item+4, s, Current ? Theme.Color(clrFontColor) : Theme.Color(clrFontColorInactive), clrTransparent, fontSansBook27, xt_end);
          }
       if (!Tab(i + 1))
          break;
