@@ -93,6 +93,9 @@ private:
   const cFont *fontSansBold16;
   const cFont *fontCryptSymbols;
   std::string logoPath, logoFormat;
+  #if VDRVERSNUM > 10716
+  cPixmap *logoPixmap;
+  #endif
   void DrawRedButton(int xButton, int yButton);
   void DrawGreenButton(int xButton, int yButton);
   void DrawYellowButton(int xButton, int yButton);
@@ -216,8 +219,8 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
 	  if (bpp > 8)
 	  {
 	    cImage logo (cSize(64, 48));
+		osd->DestroyPixmap(logoPixmap);
 	    if(osdbitmap.Load(logo, displayLogoPath.c_str(), 64, 48)){
-	      cPixmap *logoPixmap;
 	      logoPixmap = osd->CreatePixmap(0, cRect(x1ChannelInfo+120, y1ChannelInfo, 64, 48));
 	      logoPixmap->DrawImage(cPoint(0, 0), logo);
         }
@@ -237,8 +240,8 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
 	  if (bpp > 8)
 	  {
 	    cImage logo (cSize(120, 100));
+		osd->DestroyPixmap(logoPixmap);
 	    if(osdbitmap.Load(logo, displayLogoPath.c_str(), 120, 100)){
-	      cPixmap *logoPixmap;
 	      logoPixmap = osd->CreatePixmap(0, cRect(x2ChannelInfo-125, y2ChannelInfo-110, 120, 100));
 	      logoPixmap->DrawImage(cPoint(0, 0), logo);
         }
@@ -657,6 +660,9 @@ private:
   int bpp;
   unsigned long blinkNext;
   int blinkState;
+  #if VDRVERSNUM > 10716
+  cPixmap *epgPixmap;
+  #endif
   const cBitmap *bRecTitleHead;
   const char *MenuTitleClean(std::string Title);
   const char *MenuTitleRest(std::string Title);
@@ -774,6 +780,9 @@ int cSkinPearlHDDisplayMenu::MaxItems(void)
 
 void cSkinPearlHDDisplayMenu::Clear(void)
 {
+  #if VDRVERSNUM > 10716
+  osd->DestroyPixmap(epgPixmap);
+  #endif
   textScroller.Reset();
 }
 
@@ -1014,7 +1023,6 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
 	{
 	  cImage epgImg (cSize(300, 225));
 	  if(osdbitmap.Load(epgImg, epgPath.str().c_str(), 300, 225)){
-	    cPixmap *epgPixmap;
 	    epgPixmap = osd->CreatePixmap(0, cRect(x2Menu-330, y2Menu-285, 300, 225));
 	    epgPixmap->DrawImage(cPoint(0, 0), epgImg);
       }
