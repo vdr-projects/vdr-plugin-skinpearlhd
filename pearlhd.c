@@ -667,6 +667,7 @@ private:
   void DrawBlueButton(int xButton, int yButton);
   int GetRecordingLength(const char *FileName, double FramesPerSecond, bool IsPesRecording);
   int GetRecordingCuttedLength(const char *FileName, double FramesPerSecond, bool IsPesRecording);
+  bool IsTextProgressbar(const char *Text);
 public:
   cSkinPearlHDDisplayMenu(void);
   virtual ~cSkinPearlHDDisplayMenu();
@@ -941,18 +942,34 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
 	osd->DrawEllipse(x1Item+60, y2Item-21, x1Item+74, y2Item-6, Theme.Color(clrLoLight), 3);
   }
   
-  for (int i = 0; i < MaxTabs; i++) {
-      const char *s = GetTabbedText(Text, i);
-      if (s) {
-		 int xt = x1Item+75 + Tab(i);
-		 int xt_end = Tab(i+1);
-		 if (!Tab(i+1))
-		   xt_end = x2Item-xt;
-		 osd->DrawText(xt, y1Item+4, s, Current ? Theme.Color(clrFontColor) : Theme.Color(clrFontColorInactive), clrTransparent, fontSansBook27, xt_end);
-         }
-      if (!Tab(i + 1))
-         break;
+  for (int i = 0; i < MaxTabs; i++)
+  {
+    const char *s = GetTabbedText(Text, i);
+    if (s)
+    {
+      int xt = x1Item+75 + Tab(i);
+	  int xt_end = Tab(i+1);
+	  if (!Tab(i+1))
+        xt_end = x2Item-xt;
+	  if (!IsTextProgressbar(s))
+        osd->DrawText(xt, y1Item+4, s, Current ? Theme.Color(clrFontColor) : Theme.Color(clrFontColorInactive), clrTransparent, fontSansBook27, xt_end);
+      else
+      {
+	    std::string text = s;
+		int pgwidth = fontSansBook27->Width(s);
+	    int total = text.length() - 2;
+        int current = 0;
+        const char *p = text.c_str() + 1;
+        while (*p == '|')
+          (++current, ++p);
+		osd->DrawRectangle(xt, y1Item+4, xt+pgwidth, y1Item+27, Theme.Color(Current ? clrFontColor : clrFontColorInactive));
+		osd->DrawRectangle(xt+2, y1Item+6, xt+pgwidth-2, y1Item+27-2, Theme.Color(Current ? clrMainSolid : clrLoLight));
+		osd->DrawRectangle(xt+4, y1Item+8, xt+int(double(pgwidth)*(double(current)/double(total))), y1Item+27-4, Theme.Color(Current ? clrFontColor : clrFontColorInactive));
       }
+    }
+    if (!Tab(i + 1))
+      break;
+  }
   SetEditableWidth(Tab(1));
 }
 
@@ -1472,6 +1489,23 @@ int cSkinPearlHDDisplayMenu::GetRecordingCuttedLength(const char *FileName, doub
 
 	// just to avoid, that the cutted length is bigger than the total length
 	return (int)length > totalLength ? totalLength : (int)length;
+}
+
+bool cSkinPearlHDDisplayMenu::IsTextProgressbar(const char *Text)
+{
+  std::string text = Text;
+  bool isprogress = false;
+  if (text.length() > 5 && text[0] == '[' && text[text.length() - 1] == ']') {
+    const char *p = text.c_str() + 1;
+    isprogress = true;
+      for (; *p != ']'; ++p) {
+      if (*p != ' ' && *p != '|') {
+        isprogress = false;
+        break;
+      }
+    }
+  }
+  return isprogress;
 }
 
 // --- cSkinPearlHDDisplayReplay -----------------------------------------------
