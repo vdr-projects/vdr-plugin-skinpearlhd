@@ -63,7 +63,7 @@ bool cOSDImageBitmap::Load(cBitmap &bmp, const char *Filename, int width, int he
 }
 
 #if VDRVERSNUM > 10716
-bool cOSDImageBitmap::Load(cImage &bmp, const char *Filename, int width, int height)
+bool cOSDImageBitmap::Load(const char *Filename, int width, int height)
 {
   try
   {
@@ -71,27 +71,11 @@ bool cOSDImageBitmap::Load(cImage &bmp, const char *Filename, int width, int hei
     int start = cTimeMs::Now();
 	#endif
 	
-    int w, h;
-	Image osdImage;
 	osdImage.read(Filename);
 
 	if (height != 0 || width != 0)
 	  osdImage.sample( Geometry(width, height));
-	w = osdImage.columns();
-	h = osdImage.rows();
 	
-	const PixelPacket *pixels = osdImage.getConstPixels(0, 0, w, h);
-	
-	for (int iy = 0; iy < h; ++iy) {
-      for (int ix = 0; ix < w; ++ix) {
-        tColor col = (~int(pixels->opacity * 255 / MaxRGB) << 24) 
-	      | (int(pixels->green * 255 / MaxRGB) << 8) 
-          | (int(pixels->red * 255 / MaxRGB) << 16) 
-          | (int(pixels->blue * 255 / MaxRGB) );
-        bmp.SetPixel(cPoint(ix, iy), col);
-        ++pixels;
-      }
-    }
 	#ifdef DEBUG_SKINPEARLHD
     printf ("skinpearlhd: bitmap render took %d ms\n", int(cTimeMs::Now()-start));
 	#endif
@@ -101,5 +85,25 @@ bool cOSDImageBitmap::Load(cImage &bmp, const char *Filename, int width, int hei
   {
     return false;
   }
+}
+
+cImage cOSDImageBitmap::GetImage()
+{
+  int w, h;
+  w = osdImage.columns();
+  h = osdImage.rows();
+  cImage image (cSize(w, h));
+  const PixelPacket *pixels = osdImage.getConstPixels(0, 0, w, h);
+  for (int iy = 0; iy < h; ++iy) {
+    for (int ix = 0; ix < w; ++ix) {
+      tColor col = (~int(pixels->opacity * 255 / MaxRGB) << 24) 
+	    | (int(pixels->green * 255 / MaxRGB) << 8) 
+        | (int(pixels->red * 255 / MaxRGB) << 16) 
+        | (int(pixels->blue * 255 / MaxRGB) );
+      image.SetPixel(cPoint(ix, iy), col);
+      ++pixels;
+    }
+  }
+  return image;
 }
 #endif

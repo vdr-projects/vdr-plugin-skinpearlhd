@@ -218,10 +218,11 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
 	  #if VDRVERSNUM > 10716
 	  if (bpp > 8)
 	  {
-	    cImage logo (cSize(64, 48));
-		osd->DestroyPixmap(logoPixmap);
-	    if(osdbitmap.Load(logo, displayLogoPath.c_str(), 64, 48)){
-	      logoPixmap = osd->CreatePixmap(0, cRect(x1ChannelInfo+120, y1ChannelInfo, 64, 48));
+	    osd->DestroyPixmap(logoPixmap);
+	    if(osdbitmap.Load(displayLogoPath.c_str(), 64, 48))
+        {
+          cImage logo = osdbitmap.GetImage();
+	      logoPixmap = osd->CreatePixmap(0, cRect(x1ChannelInfo+120, y1ChannelInfo, logo.Width(), logo.Height()));
 	      logoPixmap->DrawImage(cPoint(0, 0), logo);
         }
 	  }
@@ -239,10 +240,11 @@ void cSkinPearlHDDisplayChannel::SetChannel(const cChannel *Channel, int Number)
 	  #if VDRVERSNUM > 10716
 	  if (bpp > 8)
 	  {
-	    cImage logo (cSize(120, 100));
-		osd->DestroyPixmap(logoPixmap);
-	    if(osdbitmap.Load(logo, displayLogoPath.c_str(), 120, 100)){
-	      logoPixmap = osd->CreatePixmap(0, cRect(x2ChannelInfo-125, y2ChannelInfo-110, 120, 100));
+	    osd->DestroyPixmap(logoPixmap);
+	    if(osdbitmap.Load(displayLogoPath.c_str(), 120, 100))
+        {
+          cImage logo = osdbitmap.GetImage();
+	      logoPixmap = osd->CreatePixmap(0, cRect(x2ChannelInfo-125, y2ChannelInfo-110, logo.Width(), logo.Height()));
 	      logoPixmap->DrawImage(cPoint(0, 0), logo);
         }
 	  }
@@ -1021,9 +1023,9 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
 	#if VDRVERSNUM > 10716
 	if (bpp > 8)
 	{
-	  cImage epgImg (cSize(300, 225));
-	  if(osdbitmap.Load(epgImg, epgPath.str().c_str(), 300, 225)){
-	    epgPixmap = osd->CreatePixmap(0, cRect(x2Menu-330, y2Menu-285, 300, 225));
+	  if(osdbitmap.Load(epgPath.str().c_str(), 300, 225)){
+        cImage epgImg = osdbitmap.GetImage();
+	    epgPixmap = osd->CreatePixmap(0, cRect(x2Menu-330, y2Menu-285, epgImg.Width(), epgImg.Height()));
 	    epgPixmap->DrawImage(cPoint(0, 0), epgImg);
       }
 	}
