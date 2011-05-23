@@ -418,8 +418,8 @@ void cSkinPearlHDDisplayChannel::SetEvents(const cEvent *Present, const cEvent *
 		 {
 		   snprintf (title, sizeof(title), "%s", e->Title());
 		 }
-		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 106 + (i * 95), title, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
-		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 151 + (i * 95), e->ShortText(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
+		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 96 + (i * 95), title, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook37, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
+		 osd->DrawText(x1ChannelInfo + 240, y1ChannelInfo + 141 + (i * 95), e->ShortText(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2ChannelInfo -125) - (x1ChannelInfo + 240));
 		 
 		 if (i == 0)
 		 {
