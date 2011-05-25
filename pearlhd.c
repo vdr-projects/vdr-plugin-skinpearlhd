@@ -960,7 +960,7 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
     {
       int xt = x1Item+75 + Tab(i);
 	  if (!IsTextProgressbar(s))
-        osd->DrawText(xt, y1Item+4, s, Theme.Color(Current ? clrFontColor : clrFontColorInactive), Theme.Color(Current ? clrMainSolid : clrLoLight), fontSansBook27, x2Item-xt));
+        osd->DrawText(xt, y1Item+4, s, Theme.Color(Current ? clrFontColor : clrFontColorInactive), Theme.Color(Current ? clrMainSolid : clrLoLight), fontSansBook27, x2Item-xt);
       else
       {
 	    std::string text = s;
