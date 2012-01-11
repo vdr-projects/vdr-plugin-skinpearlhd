@@ -1610,12 +1610,16 @@ void cSkinPearlHDDisplayReplay::SetProgress(int Current, int Total)
 
 void cSkinPearlHDDisplayReplay::SetCurrent(const char *Current)
 {
+  if (!Current)
+    return;
   current = (char*) malloc(sizeof(Current));
   strcpy (current, Current);
 }
 
 void cSkinPearlHDDisplayReplay::SetTotal(const char *Total)
 {
+  if (!Total)
+    return;
   total = (char*) malloc(sizeof(Total));
   strcpy (total, Total);
 }
