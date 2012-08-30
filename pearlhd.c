@@ -16,6 +16,9 @@
 #include <vdr/themes.h>
 #include <vdr/plugin.h>
 #include <vdr/tools.h>
+#if VDRVERSNUM > 10727
+#include <vdr/videodir.h>
+#endif
 
 #define MENU_TYPE_VDR 1
 #define MENU_TYPE_SCHEDULE 2
@@ -808,9 +811,38 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
     menuType = MENU_TYPE_RECORDINGS;
   else
     menuType = -1;
-	
-  DrawHeader();
 
+  DrawHeader();
+  
+#if VDRVERSNUM > 10727
+  switch (MenuCategory())
+  {
+  case mcMain :
+    //Sub Menu VDR, Commands
+    osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-480, y2Menu, Theme.Color(clrMainLight));
+  
+    // Background right
+    osd->DrawRectangle(x2Menu-479, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainSolid));
+  	osd->DrawText(x2Menu-479, y2Menu-55, *cVideoDiskUsage::String(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 449, 0, taRight);
+  break;
+
+  case mcSchedule :
+  // Sub Menu Schedule, Channels, Setup, Edit timer
+    osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-360, y2Menu, Theme.Color(clrMainLight));
+	
+	//Background Right
+	osd->DrawRectangle(x2Menu-360, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainSolid));
+    osd->DrawText(x2Menu-360, y2Menu-55, MenuTitleRest(Title), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 330, 0, taRight);
+	osd->DrawText(x1Menu+75, y1Menu+60, Title, Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
+  break;
+   
+  default :
+  //Sub Menu Default
+    osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainLight));
+	osd->DrawText(x1Menu+75, y1Menu+60, MenuTitleClean(Title), Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
+  break;
+  }
+#else
   switch (menuType)
   {
   case MENU_TYPE_VDR :
@@ -821,7 +853,7 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
     osd->DrawRectangle(x2Menu-479, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainSolid));
   	osd->DrawText(x2Menu-479, y2Menu-55, MenuTitleRest(Title), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 449, 0, taRight);
   break;
-  
+
   case MENU_TYPE_SCHEDULE :
   // Sub Menu Schedule, Channels, Setup, Edit timer
     osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-360, y2Menu, Theme.Color(clrMainLight));
@@ -838,6 +870,7 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
 	osd->DrawText(x1Menu+75, y1Menu+60, MenuTitleClean(Title), Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
   break;
   }
+#endif
 }
 
 void cSkinPearlHDDisplayMenu::SetButtons(const char *Red, const char *Green, const char *Yellow, const char *Blue)
