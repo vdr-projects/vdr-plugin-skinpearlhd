@@ -1087,7 +1087,7 @@ void cSkinPearlHDDisplayMenu::SetRecording(const cRecording *Recording)
   osd->DrawText(x1Menu+75, y1Menu+60, Info->Title(), Theme.Color(clrFontColor), clrTransparent, fontSansBold37);
   
   char text[32];
-  snprintf(text, sizeof(text), "%s  %s", *DateString(Recording->start), *TimeString(Recording->start));
+  snprintf(text, sizeof(text), "%s  %s", *DateString(Recording->Start()), *TimeString(Recording->Start()));
   osd->DrawText(x1Menu+75, y1Menu+175, text, Theme.Color(clrFontColor), clrTransparent, fontSansBook27);
   
   int RecordingLength, RecordingCuttedLength;
@@ -1480,11 +1480,11 @@ int cSkinPearlHDDisplayMenu::GetRecordingCuttedLength(const char *FileName, doub
 		int start = 1; // first frame
 		bool isStart = true;
 
-		for (cMark *m = marks.First(); m; m = marks.GetNext(m->position)) {
+		for (cMark *m = marks.First(); m; m = marks.GetNext(m->Position())) {
 			if (isStart)
-				start = m->position;
+				start = m->Position();
 			else
-				length += (double)(m->position - start + 1 + diffIFrame) / (60 * FramesPerSecond); // [min]
+				length += (double)(m->Position() - start + 1 + diffIFrame) / (60 * FramesPerSecond); // [min]
 
 			isStart = !isStart;
 		}
