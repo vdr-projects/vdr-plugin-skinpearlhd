@@ -925,7 +925,7 @@ void cSkinPearlHDDisplayMenu::SetMessage(eMessageType Type, const char *Text)
 {
   if (Text) {
     tColor color;
-    int MessageX2;
+    int MessageX2 = 0;
     switch (Type) {
 	  case mtInfo :
 	    color = Theme.Color(clrMainSolid);
@@ -985,10 +985,10 @@ void cSkinPearlHDDisplayMenu::SetMessage(eMessageType Type, const char *Text)
 
 void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current, bool Selectable)
 {
-  int x1Item;
-  int y1Item;
-  int x2Item;
-  int y2Item;
+  int x1Item = 0;
+  int y1Item = 0;
+  int x2Item = 0;
+  int y2Item = 0;
   switch (MenuCategory())
   {
   case mcMain :
