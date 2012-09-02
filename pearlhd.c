@@ -1683,6 +1683,7 @@ private:
   int x2Message;
   int y1Message;
   int y2Message;
+  bool modeOnly;
 public:
   cSkinPearlHDDisplayReplay(bool ModeOnly);
   virtual ~cSkinPearlHDDisplayReplay();
@@ -1698,6 +1699,7 @@ public:
 
 cSkinPearlHDDisplayReplay::cSkinPearlHDDisplayReplay(bool ModeOnly)
 {
+  modeOnly = ModeOnly;
   fontSansBook27 = cFont::CreateFont("VDRSymbols Sans:Book", 27);
   x1 = 0;
   x2 = cOsd::OsdWidth();
@@ -1813,7 +1815,7 @@ void cSkinPearlHDDisplayReplay::SetMessage(eMessageType Type, const char *Text)
 
 void cSkinPearlHDDisplayReplay::Flush(void)
 {
-  if (current && total)
+  if (current && total && !modeOnly)
   {
 	char timeplayed[50];
 	snprintf (timeplayed, sizeof(timeplayed), "%s %s %s", current, tr("of"), total);
