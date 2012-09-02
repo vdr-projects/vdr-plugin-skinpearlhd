@@ -19,12 +19,12 @@
 #if VDRVERSNUM > 10727
 #include <vdr/videodir.h>
 #endif
-
+/*
 #define MENU_TYPE_VDR 1
 #define MENU_TYPE_SCHEDULE 2
 #define MENU_TYPE_RECORDINGS 3
 #define MENU_TYPE_RECORDING 4
-#define MENU_TYPE_EVENT 5
+#define MENU_TYPE_EVENT 5*/
 
 static cTheme Theme;
 
@@ -793,7 +793,7 @@ void cSkinPearlHDDisplayMenu::Clear(void)
 
 void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
 {
-  if (strcmp(trVDR("VDR"), MenuTitleClean(Title)) == 0)
+/*  if (strcmp(trVDR("VDR"), MenuTitleClean(Title)) == 0)
     menuType = MENU_TYPE_VDR;
   else if (strcmp(trVDR("Commands"), MenuTitleClean(Title)) == 0)
     menuType = MENU_TYPE_VDR;
@@ -811,13 +811,14 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
     menuType = MENU_TYPE_RECORDINGS;
   else
     menuType = -1;
-
+*/
   DrawHeader();
   
-#if VDRVERSNUM > 10727
+//#if VDRVERSNUM > 10727
   switch (MenuCategory())
   {
   case mcMain :
+  case mcCommand :
     //Sub Menu VDR, Commands
     osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-480, y2Menu, Theme.Color(clrMainLight));
   
@@ -825,8 +826,13 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
     osd->DrawRectangle(x2Menu-479, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainSolid));
   	osd->DrawText(x2Menu-479, y2Menu-55, *cVideoDiskUsage::String(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 449, 0, taRight);
   break;
+//mcUndefined = -1, mcUnknown = 0, mcMain, mcSchedule, mcChannel, mcTimer, mcRecording, mcPlugin, mcSetup, mcCommand, mcEvent, mcText, mcFolder, mcCam };
 
   case mcSchedule :
+  case mcChannel :
+  case mcSetup :
+  case mcTimer :
+  case mcEvent :
   // Sub Menu Schedule, Channels, Setup, Edit timer
     osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-360, y2Menu, Theme.Color(clrMainLight));
 	
@@ -835,14 +841,21 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
     osd->DrawText(x2Menu-360, y2Menu-55, MenuTitleRest(Title), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 330, 0, taRight);
 	osd->DrawText(x1Menu+75, y1Menu+60, Title, Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
   break;
-   
-  default :
+  
+  case mcUndefined :
+  case mcUnknown :
+  case mcRecording :
+  case mcPlugin :
+  case mcText :
+  case mcFolder :
+  case mcCam :
+  //default :
   //Sub Menu Default
     osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu, y2Menu, Theme.Color(clrMainLight));
 	osd->DrawText(x1Menu+75, y1Menu+60, MenuTitleClean(Title), Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
   break;
   }
-#else
+/*#else
   switch (menuType)
   {
   case MENU_TYPE_VDR :
@@ -870,7 +883,7 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
 	osd->DrawText(x1Menu+75, y1Menu+60, MenuTitleClean(Title), Theme.Color(clrFontColor), clrTransparent, fontSansBook37);
   break;
   }
-#endif
+#endif*/
 }
 
 void cSkinPearlHDDisplayMenu::SetButtons(const char *Red, const char *Green, const char *Yellow, const char *Blue)
@@ -927,7 +940,7 @@ void cSkinPearlHDDisplayMenu::SetMessage(eMessageType Type, const char *Text)
 	    color = Theme.Color(clrError);
 	    break;
 	}
-	switch (menuType) {
+/*	switch (menuType) {
 	 case MENU_TYPE_VDR :
 	   MessageX2 = x2Menu-479;
 	   break;
@@ -936,6 +949,29 @@ void cSkinPearlHDDisplayMenu::SetMessage(eMessageType Type, const char *Text)
 	   break;
 	 default :
 	   MessageX2 = x2Menu;
+	}*/
+	switch (MenuCategory()) {
+      case mcMain :
+      case mcCommand :
+	     MessageX2 = x2Menu-479;
+	     break;
+      
+	  case mcSchedule :
+      case mcChannel :
+      case mcSetup :
+      case mcTimer :
+      case mcEvent :
+	    MessageX2 = x2Menu-360;
+	    break;
+
+      case mcUndefined :
+      case mcUnknown :
+      case mcRecording :
+      case mcPlugin :
+      case mcText :
+      case mcFolder :
+      case mcCam :
+	    MessageX2 = x2Menu;
 	}
 	osd->SaveRegion(x1Menu, y1Menu+117, MessageX2, y1Menu+158);
     osd->DrawRectangle(x1Menu, y1Menu+117, MessageX2, y1Menu+158, color);
@@ -953,7 +989,40 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
   int y1Item;
   int x2Item;
   int y2Item;
-  switch (menuType)
+  switch (MenuCategory())
+  {
+  case mcMain :
+  case mcCommand :
+    x1Item = x1Menu;
+    y1Item = y1Menu+175 + (lineHeight * Index);
+    x2Item = x2Menu-480;
+    y2Item = y1Item + lineHeight;
+	break;
+
+  case mcSchedule :
+  case mcChannel :
+  case mcSetup :
+  case mcTimer :
+  case mcEvent :
+    x1Item = x1Menu;
+    y1Item = y1Menu+175 + (lineHeight * Index);
+    x2Item = x2Menu-360;
+    y2Item = y1Item + lineHeight;
+	break;
+
+  case mcUndefined :
+  case mcUnknown :
+  case mcRecording :
+  case mcPlugin :
+  case mcText :
+  case mcFolder :
+  case mcCam :
+    x1Item = x1Menu;
+    y1Item = y1Menu+175 + (lineHeight * Index);
+    x2Item = x2Menu;
+    y2Item = y1Item + lineHeight;
+  }
+  /*switch (menuType)
   {
   case MENU_TYPE_VDR :
     x1Item = x1Menu;
@@ -972,7 +1041,7 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
     y1Item = y1Menu+175 + (lineHeight * Index);
     x2Item = x2Menu;
     y2Item = y1Item + lineHeight;
-  }
+  }*/
   if (Current) {
     osd->DrawRectangle(x1Item+74, y1Item, x2Item-1, y2Item-6, Theme.Color(clrMainSolid));
     osd->DrawEllipse(x1Item+60, y1Item, x1Item+74, y1Item+15, Theme.Color(clrMainSolid), 2);
@@ -1019,7 +1088,7 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
   if (!Event)
      return;
 	
-  menuType = MENU_TYPE_EVENT;
+  //menuType = MENU_TYPE_EVENT;
   
   DrawHeader();
   
@@ -1109,13 +1178,14 @@ void cSkinPearlHDDisplayMenu::SetRecording(const cRecording *Recording)
   if (!Recording)
      return;
 
-  menuType = MENU_TYPE_RECORDING;
+  //menuType = MENU_TYPE_RECORDING;
   DrawHeader();
 
   const cRecordingInfo *Info = Recording->Info();
   osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-360, y2Menu, Theme.Color(clrMainLight));
   
-  osd->DrawRectangle(x2Menu-360, y1Menu+117, x2Menu-1, y2Menu, Theme.Color(clrMainSolid));
+  // Removed for now, because Recording list and RecordingInfo have the same MenuID
+  //osd->DrawRectangle(x2Menu-360, y1Menu+117, x2Menu-1, y2Menu, Theme.Color(clrMainSolid));
   
   osd->DrawText(x1Menu+75, y1Menu+60, Info->Title(), Theme.Color(clrFontColor), clrTransparent, fontSansBold37);
   
@@ -1190,7 +1260,56 @@ void cSkinPearlHDDisplayMenu::Flush(void)
   strftime(datestring, sizeof(datestring), "%d.%m.%Y", tmt);
   
   int oClockWidth = 0;
-  switch (menuType)
+  switch (MenuCategory())
+  {
+    case mcMain :
+    case mcCommand :
+	  if (PearlHDConfig.oClockText)
+	  {
+	    oClockWidth = fontSansBook27->Width(tr("oClock")) + 10;
+	    osd->DrawText(x2Menu-479, y1Menu+146, tr("oClock"), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 449, 0, taRight);
+	  }
+	  osd->DrawText(x2Menu-479, y1Menu+136, *TimeString(t), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook37, 449-oClockWidth, 0, taRight);
+      osd->DrawText(x2Menu-479, y1Menu+187, *WeekDayNameFull(t), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 449, 0, taRight);
+      osd->DrawText(x2Menu-479, y1Menu+225, datestring, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook20, 449, 0, taRight);
+	break;
+	
+    case mcSchedule :
+    case mcChannel :
+    case mcSetup :
+    case mcTimer :
+    case mcEvent :
+	  if (PearlHDConfig.oClockText)
+	  {
+	    oClockWidth = fontSansBook27->Width(tr("oClock")) + 10;
+	    osd->DrawText(x2Menu-360, y1Menu+146, tr("oClock"), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 330, 0, taRight);
+	  }
+	  osd->DrawText(x2Menu-360, y1Menu+136, *TimeString(t), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook37, 330-oClockWidth, 0, taRight);
+      osd->DrawText(x2Menu-360, y1Menu+187, *WeekDayNameFull(t), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, 330, 0, taRight);
+      osd->DrawText(x2Menu-360, y1Menu+225, datestring, Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook20, 330, 0, taRight);
+	break;
+
+    case mcRecording :
+	  if (!PearlHDConfig.RecShowClock)
+	    break;
+	  if (PearlHDConfig.oClockText)
+	  {
+	    oClockWidth = fontSansBook27->Width(tr("oClock")) + 10;
+	    osd->DrawText(x2Menu-90, y2Menu-55, tr("oClock"), Theme.Color(clrFontColor), Theme.Color(clrMainLight), fontSansBook27, 60, 0, taRight);
+	  }
+	  osd->DrawText(x2Menu-300, y2Menu-55, *TimeString(t), Theme.Color(clrFontColor), Theme.Color(clrMainLight), fontSansBook27, 270-oClockWidth, 0, taRight);
+    break;
+
+	case mcUndefined :
+    case mcUnknown :
+    case mcPlugin :
+    case mcText :
+    case mcFolder :
+    case mcCam :
+    break;
+  }
+
+  /*switch (menuType)
   {
     case MENU_TYPE_VDR :
 	  if (PearlHDConfig.oClockText)
@@ -1226,9 +1345,10 @@ void cSkinPearlHDDisplayMenu::Flush(void)
 	  }
 	  osd->DrawText(x2Menu-300, y2Menu-55, *TimeString(t), Theme.Color(clrFontColor), Theme.Color(clrMainLight), fontSansBook27, 270-oClockWidth, 0, taRight);
     break;
-  }
-  
-  if (PearlHDConfig.RecTitleInfoHead && menuType == MENU_TYPE_VDR && cRecordControls::Active())
+  }*/  
+ 
+  //if (PearlHDConfig.RecTitleInfoHead && menuType == MENU_TYPE_VDR && cRecordControls::Active())
+  if (PearlHDConfig.RecTitleInfoHead && MenuCategory() == mcMain && cRecordControls::Active())
   {
   cTimer *t = Timers.First();
   std::string RecTitleHeadString = "";
@@ -1256,7 +1376,8 @@ void cSkinPearlHDDisplayMenu::Flush(void)
 	  osd->DrawText(x1Menu+127, y1Menu+70, RecTitleHeadString.c_str(), Theme.Color(clrFontColor), Theme.Color(clrMainSolid), fontSansBook27, (x2Menu-479) - (x1Menu+127), 0, taLeft);
   }
   
-  if ((PearlHDConfig.RecTitleInfo != 0) && menuType == MENU_TYPE_VDR)
+  //if ((PearlHDConfig.RecTitleInfo != 0) && menuType == MENU_TYPE_VDR)
+  if ((PearlHDConfig.RecTitleInfo != 0) && MenuCategory() == mcMain)
   {
     int iEventCounter = 0;
 	int iNumTimers = 0;
