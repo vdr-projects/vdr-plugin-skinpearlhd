@@ -22,6 +22,7 @@ cSkinPearlHDConfig::cSkinPearlHDConfig(void)
    RecTitleInfo = 0;
    *EpgImagesDir = NULL;
    EpgDirSet = false;
+   EpgNewFilename = 1;
 }
 
 cSkinPearlHDConfig::~cSkinPearlHDConfig()
@@ -47,6 +48,7 @@ bool cSkinPearlHDConfig::SetupParse(const char *Name, const char *Value)
    else if (strcmp(Name, "ChannelInfoPadding") == 0)           ChannelInfoPadding = atoi(Value);
    else if (strcmp(Name, "RecTitleInfoHead") == 0)             RecTitleInfoHead = atoi(Value);
    else if (strcmp(Name, "RecTitleInfo") == 0)                 RecTitleInfo = atoi(Value);
+   else if (strcmp(Name, "EpgNewFilename") == 0)               EpgNewFilename = atoi(Value);
    else return false;
    return true;
 }

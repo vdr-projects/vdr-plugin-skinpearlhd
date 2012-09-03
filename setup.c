@@ -47,6 +47,7 @@ void cSkinPearlHDSetupMenu::Setup(void)
   Add(new cMenuEditBoolItem(tr("Display oClock text"), &tmpconfig->oClockText));
   Add(new cMenuEditBoolItem(tr("Display clock in Recordings/Timer menu"), &tmpconfig->RecShowClock));
   Add(new cMenuEditBoolItem(tr("Display epg images"), &tmpconfig->DisplayEpgImages));
+  Add(new cMenuEditBoolItem(tr("Use new epg images filename format"), &tmpconfig->EpgNewFilename));
   Add(new cMenuEditStraItem(tr("Epg images format"), &tmpconfig->EpgImagesFormat, 2, EpgImagesFormatItems));
   Add(new cMenuEditIntItem(tr("Padding sides"), &tmpconfig->MenuPaddingWidth));
   Add(new cMenuEditIntItem(tr("Padding top/bottom"), &tmpconfig->MenuPaddingHeight));

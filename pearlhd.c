@@ -1094,7 +1094,7 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
   
   osd->DrawRectangle(x1Menu, y1Menu+117, x2Menu-360, y2Menu, Theme.Color(clrMainLight));
   osd->DrawRectangle(x2Menu-360, y1Menu+117, x2Menu-1, y2Menu, Theme.Color(clrMainSolid));
-  
+
   if(PearlHDConfig.DisplayEpgImages)
   {
     char logoFormat[4];
@@ -1115,9 +1115,12 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
       epgPath << PearlHDConfig.EpgImagesDir;
 	else
 	{
-      epgPath << "/var/cache/vdr/epgimages";
+	  epgPath << "/var/cache/vdr/epgimages";
 	}
-	epgPath << "/" << Event->EventID() << "." << logoFormat;
+	epgPath << "/";
+	if (PearlHDConfig.EpgNewFilename)
+	  epgPath << *Event->ChannelID().ToString() << "_";
+	epgPath << Event->EventID() << "." << logoFormat;
 
 	#if VDRVERSNUM > 10716
 	if (bpp > 8)

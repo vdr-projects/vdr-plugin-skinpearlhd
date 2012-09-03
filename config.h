@@ -33,6 +33,7 @@ public:
    int RecTitleInfo;
    char EpgImagesDir[100];
    bool EpgDirSet;
+   int EpgNewFilename;
 };
 
 extern cSkinPearlHDConfig PearlHDConfig;

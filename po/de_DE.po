@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: VDR 1.7.17\n"
 "Report-Msgid-Bugs-To: <see README>\n"
-"POT-Creation-Date: 2011-05-10 18:12+0200\n"
+"POT-Creation-Date: 2012-09-03 21:59+0200\n"
 "PO-Revision-Date: 2010-10-10 10:10+0300\n"
 "Last-Translator: a\n"
 "Language-Team: German\n"
@@ -97,7 +97,7 @@ msgstr "Lautstärke"
 msgid "Mute"
 msgstr "Stumm"
 
-msgid "PearlHD"
+msgid "PearlHD(native)"
 msgstr ""
 
 msgid "General"
@@ -120,6 +120,9 @@ msgstr "Uhrzeit im Aufnahme/Timer Menü anzeigen"
 
 msgid "Display epg images"
 msgstr "EPG-Bilder anzeigen"
+
+msgid "Use new epg images filename format"
+msgstr "Neue EPG-Bilder Dateinamen nutzen"
 
 msgid "Epg images format"
 msgstr "EPG-Bildformat"
