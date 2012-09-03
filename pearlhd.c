@@ -1115,7 +1115,7 @@ void cSkinPearlHDDisplayMenu::SetEvent(const cEvent *Event)
       epgPath << PearlHDConfig.EpgImagesDir;
 	else
 	{
-	  epgPath << cPlugin::ConfigDirectory() << "/tvm2vdr/epgimages";
+      epgPath << "/var/cache/vdr/epgimages";
 	}
 	epgPath << "/" << Event->EventID() << "." << logoFormat;
 
