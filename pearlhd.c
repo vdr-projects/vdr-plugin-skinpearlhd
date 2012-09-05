@@ -1066,7 +1066,7 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
       else
       {
 	    std::string text = s;
-		int pgwidth = fontSansBook27->Width(s);
+		int pgwidth = Tab(i+1) - Tab(i);
 	    int total = text.length() - 2;
         int current = 0;
         const char *p = text.c_str() + 1;
@@ -1074,7 +1074,7 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
           (++current, ++p);
 		osd->DrawRectangle(xt, y1Item+4, xt+pgwidth, y1Item+27, Theme.Color(Current ? clrFontColor : clrFontColorInactive));
 		osd->DrawRectangle(xt+2, y1Item+6, xt+pgwidth-2, y1Item+27-2, Theme.Color(Current ? clrMainSolid : clrLoLight));
-		osd->DrawRectangle(xt+4, y1Item+8, xt+int(double(pgwidth)*(double(current)/double(total))), y1Item+27-4, Theme.Color(Current ? clrFontColor : clrFontColorInactive));
+		osd->DrawRectangle(xt+4, y1Item+8, xt+int(double(pgwidth-4)*(double(current)/double(total))), y1Item+27-4, Theme.Color(Current ? clrFontColor : clrFontColorInactive));
       }
     }
     if (!Tab(i + 1))
