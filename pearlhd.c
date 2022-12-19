@@ -831,6 +831,16 @@ void cSkinPearlHDDisplayMenu::SetTitle(const char *Title)
   case mcSchedule :
   case mcChannel :
   case mcSetup :
+  case mcSetupOsd :
+  case mcSetupEpg :
+  case mcSetupDvb :
+  case mcSetupLnb :
+  case mcSetupCam :
+  case mcSetupRecord :
+  case mcSetupReplay :
+  case mcSetupMisc :
+  case mcSetupPlugins :
+  case mcPluginSetup :
   case mcTimer :
   case mcEvent :
   // Sub Menu Schedule, Channels, Setup, Edit timer
@@ -959,6 +969,16 @@ void cSkinPearlHDDisplayMenu::SetMessage(eMessageType Type, const char *Text)
 	  case mcSchedule :
       case mcChannel :
       case mcSetup :
+      case mcSetupOsd :
+      case mcSetupEpg :
+      case mcSetupDvb :
+      case mcSetupLnb :
+      case mcSetupCam :
+      case mcSetupRecord :
+      case mcSetupReplay :
+      case mcSetupMisc :
+      case mcSetupPlugins :
+      case mcPluginSetup :
       case mcTimer :
       case mcEvent :
 	    MessageX2 = x2Menu-360;
@@ -1002,6 +1022,16 @@ void cSkinPearlHDDisplayMenu::SetItem(const char *Text, int Index, bool Current,
   case mcSchedule :
   case mcChannel :
   case mcSetup :
+  case mcSetupOsd :
+  case mcSetupEpg :
+  case mcSetupDvb :
+  case mcSetupLnb :
+  case mcSetupCam :
+  case mcSetupRecord :
+  case mcSetupReplay :
+  case mcSetupMisc :
+  case mcSetupPlugins :
+  case mcPluginSetup :
   case mcTimer :
   case mcEvent :
     x1Item = x1Menu;
@@ -1280,6 +1310,16 @@ void cSkinPearlHDDisplayMenu::Flush(void)
     case mcSchedule :
     case mcChannel :
     case mcSetup :
+    case mcSetupOsd :
+    case mcSetupEpg :
+    case mcSetupDvb :
+    case mcSetupLnb :
+    case mcSetupCam :
+    case mcSetupRecord :
+    case mcSetupReplay :
+    case mcSetupMisc :
+    case mcSetupPlugins :
+    case mcPluginSetup :
     case mcTimer :
     case mcEvent :
 	  if (PearlHDConfig.oClockText)
