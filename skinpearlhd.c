@@ -8,13 +8,13 @@
 #include <getopt.h>
 #include <string>
 
-#include "pearlhd.h" 
+#include "pearlhd.h"
 #include "setup.h"
 #include "config.h"
- 
+
 #include <vdr/plugin.h>
 
-static const char *VERSION        = "0.0.1";
+static const char *VERSION        = "0.0.2";
 static const char *DESCRIPTION    = "PearlHD Skin";
 
 class cPluginSkinpearlhd : public cPlugin {
